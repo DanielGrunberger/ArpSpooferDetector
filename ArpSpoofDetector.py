@@ -5,15 +5,15 @@ from python_arptable import get_arp_table
 
 def isDuplicatedMAC():
      arp_table = get_arp_table()
-     print(arp_table)
+     #print(arp_table)
      for index in range(0, len(arp_table)):
         current_MAC = arp_table[index]['HW address']
-        print(current_MAC)
+       # print(current_MAC)
         if index == len(arp_table):
             return False
         for i in range(index+1, len(arp_table)):
             MAC = arp_table[i]['HW address']
-            print(MAC)
+        #    print(MAC)
             if current_MAC == MAC:
                 return True
 
@@ -38,9 +38,11 @@ def isArpSpoofing(packet):
             condition1 = True
 
     condition2 = isDuplicatedMAC()
-
+#    print(condition1)
+#   print(condition2)
     if condition2 and condition1:
         print("Arp spoof going on !!!!")
+        #exit()
 
 
 
@@ -50,4 +52,4 @@ def isArpSpoofing(packet):
 
 isDuplicatedMAC()
 
-sniff(prn = isArpSpoofing, lfilter = lambda x: x.hasLayer(ARP), count = 0, store=False)
+sniff(prn=isArpSpoofing, lfilter=lambda x: x.haslayer(ARP), count=0, store=False)
